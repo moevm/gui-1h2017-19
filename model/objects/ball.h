@@ -25,6 +25,9 @@ public:
          double speedX = 0,
          double speedY = 0);
 
+    double getX() const;
+    double getY() const;
+
     double getSpeedX() const;
     double getSpeedY() const;
 

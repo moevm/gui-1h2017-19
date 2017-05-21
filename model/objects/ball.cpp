@@ -34,6 +34,16 @@ Ball::Ball(double x,
     recalculateAccel();
 }
 
+double Ball::getX() const
+{
+    return x;
+}
+
+double Ball::getY() const
+{
+    return y;
+}
+
 double Ball::getSpeedX() const
 {
     return speedX;
