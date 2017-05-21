@@ -10,6 +10,17 @@ Table::Table(double width,
       height(height)
 {}
 
+Table::Table(Table const & table)
+    : width(table.width),
+      height(table.height)
+{
+    std::for_each(table.balls.begin(),
+                  table.balls.end(),
+                  [&](Ball * ball) {
+        balls.insert(new Ball(*ball));
+    });
+}
+
 double Table::getWidth() const
 {
     return width;

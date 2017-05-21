@@ -17,6 +17,8 @@ public:
     Table(double width,
           double height);
 
+    Table(Table const & table);
+
     double getWidth() const;
     double getHeight() const;
 
