@@ -1,5 +1,6 @@
 #include "table.h"
 #include "ball.h"
+#include "../utils/ballsutils.h"
 
 #include <algorithm>
 
@@ -19,13 +20,31 @@ double Table::getHeight() const
     return height;
 }
 
-bool Table::addBall(Ball * /*ball*/)
+bool Table::addBall(Ball * ball)
 {
 
-    // TODO: Подготовить добавление шара на стол, учитывая коллизии с другими
-    // шарами
+    if (balls.count(ball)) {
+        return false;
+    }
 
-    return false;
+    if (BallsUtils::collisionWithTable(ball, this)) {
+        return false;
+    }
+
+    bool canAdd = true;
+    std::for_each(balls.begin(),
+                  balls.end(),
+                  [&](Ball * anotherBall) {
+        if (BallsUtils::collision(ball, anotherBall)) {
+            canAdd = false;
+        }
+    });
+
+    if (canAdd) {
+        balls.insert(ball);
+    }
+
+    return canAdd;
 }
 
 Table::~Table()
