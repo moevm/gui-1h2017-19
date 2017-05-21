@@ -7,79 +7,48 @@ void Ball::recalculateAccel()
 {
     using Constants::ACCELERATION;
 
-    double speed = getSpeed();
-
-    if (speed == 0) {
-        accelX = 0;
-        accelY = 0;
-
+    if (speed.getSize() == 0) {
+        accel.setX(0);
+        accel.setY(0);
         return;
     }
 
-    accelX = speedX / speed * ACCELERATION;
-    accelY = speedY / speed * ACCELERATION;
+    accel.setX(speed.getX() / speed.getSize() * ACCELERATION);
+    accel.setY(speed.getY() / speed.getSize() * ACCELERATION);
 }
 
-Ball::Ball(double x,
-           double y,
+Ball::Ball(DoubleVector2D position,
            double radius,
-           double speedX,
-           double speedY)
-    : x(x),
-      y(y),
-      speedX(speedX),
-      speedY(speedY),
+           DoubleVector2D speed)
+    : position(position),
+      speed(speed),
       radius(radius)
 {
     recalculateAccel();
 }
 
-double Ball::getX() const
+DoubleVector2D Ball::getPosition() const
 {
-    return x;
+    return position;
 }
 
-double Ball::getY() const
+void Ball::setPosition(DoubleVector2D position)
 {
-    return y;
+    this->position = position;
 }
 
-double Ball::getSpeedX() const
+DoubleVector2D Ball::getSpeed() const
 {
-    return speedX;
+    return speed;
 }
 
-double Ball::getSpeedY() const
+void Ball::setSpeed(DoubleVector2D speed)
 {
-    return speedY;
-}
-
-double Ball::getSpeed() const
-{
-    using std::sqrt;
-    using std::pow;
-
-    return sqrt(pow(speedX, 2) +
-                pow(speedY, 2));
-}
-
-double Ball::getAngle() const
-{
-    using std::atan2;
-
-    return atan2(speedY,
-                 speedX);
+    this->speed = speed;
+    recalculateAccel();
 }
 
 double Ball::getRadius() const
 {
     return radius;
-}
-
-void Ball::setSpeed(double speedX, double speedY)
-{
-    this->speedX = speedX;
-    this->speedY = speedY;
-
-    recalculateAccel();
 }

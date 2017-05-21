@@ -1,43 +1,31 @@
 #ifndef BALL_H
 #define BALL_H
 
+#include "doublevector2d.h"
 
 class Ball
 {
 private:
-    double x;
-    double y;
-
-    double speedX;
-    double speedY;
-
-    double accelX;
-    double accelY;
+    DoubleVector2D position;
+    DoubleVector2D speed;
+    DoubleVector2D accel;
 
     double const radius;
 
     void recalculateAccel();
 
 public:
-    Ball(double x,
-         double y,
+    Ball(DoubleVector2D position,
          double radius,
-         double speedX = 0,
-         double speedY = 0);
+         DoubleVector2D speed = DoubleVector2D());
 
-    double getX() const;
-    double getY() const;
+    DoubleVector2D getPosition() const;
+    void setPosition(DoubleVector2D position);
 
-    double getSpeedX() const;
-    double getSpeedY() const;
-
-    double getSpeed() const;
-    double getAngle() const;
+    DoubleVector2D getSpeed() const;
+    void setSpeed(DoubleVector2D speed);
 
     double getRadius() const;
-
-    void setSpeed(double speedX,
-                  double speedY);
 };
 
 #endif // BALL_H

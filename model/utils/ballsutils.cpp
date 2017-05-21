@@ -10,8 +10,14 @@ double BallsUtils::distance(Ball * first,
     using std::sqrt;
     using std::pow;
 
-    return sqrt(pow(first->getX() - second->getX(), 2) +
-                pow(first->getY() - second->getY(), 2));
+    double firstX = first->getPosition().getX();
+    double firstY = first->getPosition().getY();
+
+    double secondX = second->getPosition().getX();
+    double secondY = second->getPosition().getY();
+
+    return sqrt(pow(firstX - secondX, 2) +
+                pow(firstY - secondY, 2));
 }
 
 bool BallsUtils::collision(Ball * first,
@@ -23,8 +29,8 @@ bool BallsUtils::collision(Ball * first,
 bool BallsUtils::collisionWithTable(Ball * ball,
                                     Table * table)
 {
-    double ballX = ball->getX();
-    double ballY = ball->getY();
+    double ballX = ball->getPosition().getX();
+    double ballY = ball->getPosition().getY();
     double ballRadius = ball->getRadius();
 
     double width = table->getWidth();
