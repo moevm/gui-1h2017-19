@@ -27,3 +27,6 @@ include (model/pool2d-model.pri)
 include (gui/pool2d-gui.pri)
 
 SOURCES += $$PWD/*.cpp
+
+DISTFILES += \
+    .gitignore
