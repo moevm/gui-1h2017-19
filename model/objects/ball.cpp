@@ -53,6 +53,14 @@ double Ball::getSpeed() const
                 pow(speedY, 2));
 }
 
+double Ball::getAngle() const
+{
+    using std::atan2;
+
+    return atan2(speedY,
+                 speedX);
+}
+
 double Ball::getRadius() const
 {
     return radius;

@@ -29,6 +29,8 @@ public:
     double getSpeedY() const;
 
     double getSpeed() const;
+    double getAngle() const;
+
     double getRadius() const;
 
     void setSpeed(double speedX,
