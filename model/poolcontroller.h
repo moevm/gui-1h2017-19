@@ -1,25 +1,26 @@
 #ifndef POOLCONTROLLER_H
 #define POOLCONTROLLER_H
 
+#include <vector>
+
 class Table;
+class Snapshot;
 
 class PoolController
 {
 private:
-    Table * table;
+    Table * table = nullptr;
 
-    enum Status {
-        BALL_STOPPED,
-        WALL_COLLISION,
-        BALLS_COLLISION
-    };
+    std::vector<Snapshot *> history;
 
     double timeToStop() const;
+    double timeToWallCollision() const;
 
 public:
-    PoolController();
-
+    void setTable(Table * table);
     void calculateHit();
+
+    ~PoolController();
 };
 
 #endif // POOLCONTROLLER_H
