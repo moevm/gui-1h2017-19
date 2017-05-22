@@ -15,8 +15,8 @@ private:
     void rectangularToPolar();
 
 public:
-    DoubleVector2D(double x = 0,
-                   double y = 0);
+    DoubleVector2D(double size = 0,
+                   double angle = 0);
 
     double getX() const;
     void setX(double value);

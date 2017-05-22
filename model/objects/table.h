@@ -24,6 +24,8 @@ public:
 
     bool addBall(Ball * ball);
 
+    bool hasMoving() const;
+
     ~Table();
 };
 

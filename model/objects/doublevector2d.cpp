@@ -21,12 +21,12 @@ void DoubleVector2D::rectangularToPolar()
     angle = atan2(y, x);
 }
 
-DoubleVector2D::DoubleVector2D(double x,
-                               double y)
-    : x(x),
-      y(y)
+DoubleVector2D::DoubleVector2D(double size,
+                               double angle)
+    : size(size > 0 ? size : 0),
+      angle(angle)
 {
-    rectangularToPolar();
+    polarToRectangular();
 }
 
 double DoubleVector2D::getX() const

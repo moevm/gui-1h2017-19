@@ -58,6 +58,19 @@ bool Table::addBall(Ball * ball)
     return canAdd;
 }
 
+bool Table::hasMoving() const
+{
+    bool has = false;
+
+    std::for_each(balls.begin(),
+                  balls.end(),
+                  [&](Ball * ball) {
+        has = has || ball->moving();
+    });
+
+    return has;
+}
+
 Table::~Table()
 {
     std::for_each(balls.begin(),
