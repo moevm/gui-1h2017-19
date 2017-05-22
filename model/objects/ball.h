@@ -25,6 +25,8 @@ public:
     DoubleVector2D getSpeed() const;
     void setSpeed(DoubleVector2D speed);
 
+    DoubleVector2D getAccel() const;
+
     double getRadius() const;
 
     bool moving() const;

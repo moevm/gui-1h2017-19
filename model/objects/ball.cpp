@@ -49,6 +49,11 @@ void Ball::setSpeed(DoubleVector2D speed)
     recalculateAccel();
 }
 
+DoubleVector2D Ball::getAccel() const
+{
+    return accel;
+}
+
 double Ball::getRadius() const
 {
     return radius;
