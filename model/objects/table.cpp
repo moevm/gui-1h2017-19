@@ -3,6 +3,7 @@
 #include "../utils/ballsutils.h"
 
 #include <algorithm>
+#include <limits>
 
 Table::Table(double width,
              double height)
@@ -69,6 +70,19 @@ bool Table::hasMoving() const
     });
 
     return has;
+}
+
+double Table::shortestTimeToStop() const
+{
+    double time = std::numeric_limits<double>::infinity();
+
+    std::for_each(balls.begin(),
+                  balls.end(),
+                  [&](Ball * ball) {
+        time = std::min(time, ball->timeToStop());
+    });
+
+    return time;
 }
 
 Table::~Table()

@@ -7,9 +7,11 @@ class Snapshot
 {
 private:
     Table * table;
+    double timestamp;
 
 public:
-    Snapshot(Table * table);
+    Snapshot(Table * table,
+             double timestamp);
 
     Table * getTable() const;
 };

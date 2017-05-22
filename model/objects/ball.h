@@ -28,6 +28,8 @@ public:
     double getRadius() const;
 
     bool moving() const;
+
+    double timeToStop() const;
 };
 
 #endif // BALL_H

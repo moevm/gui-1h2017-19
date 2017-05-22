@@ -1,6 +1,13 @@
 #include "poolcontroller.h"
 #include "objects/table.h"
 
+#include <limits>
+
+double PoolController::timeToStop() const
+{
+    return table->shortestTimeToStop();
+}
+
 PoolController::PoolController()
 {
 }
@@ -8,7 +15,9 @@ PoolController::PoolController()
 void PoolController::calculateHit()
 {
     while (table->hasMoving()) {
-        // TODO: для каждого шара найти, через сколько он остановится
+        double timeToNextStep = timeToStop();
+        Status status = BALL_STOPPED;
+
         // TODO: для каждого шара найти, через сколько он столкнется со стеной
         // TODO: для каждой пары шаров найти время до столкновения (если
         // столкнутся)

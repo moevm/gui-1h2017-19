@@ -8,6 +8,14 @@ class PoolController
 private:
     Table * table;
 
+    enum Status {
+        BALL_STOPPED,
+        WALL_COLLISION,
+        BALLS_COLLISION
+    };
+
+    double timeToStop() const;
+
 public:
     PoolController();
 

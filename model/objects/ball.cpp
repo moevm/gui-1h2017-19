@@ -2,6 +2,7 @@
 #include "../constants/constants.h"
 
 #include <cmath>
+#include <limits>
 
 void Ball::recalculateAccel()
 {
@@ -56,4 +57,13 @@ double Ball::getRadius() const
 bool Ball::moving() const
 {
     return speed.getSize() != 0;
+}
+
+double Ball::timeToStop() const
+{
+    if (accel.getSize() == 0) {
+        return std::numeric_limits<double>::infinity();
+    }
+
+    return speed.getSize() / accel.getSize();
 }

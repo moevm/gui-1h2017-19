@@ -26,6 +26,8 @@ public:
 
     bool hasMoving() const;
 
+    double shortestTimeToStop() const;
+
     ~Table();
 };
 
