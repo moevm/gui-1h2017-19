@@ -85,6 +85,20 @@ double Table::shortestTimeToStop() const
     return time;
 }
 
+double Table::shortestTimeToWall() const
+{
+    double time = std::numeric_limits<double>::infinity();
+
+    std::for_each(balls.begin(),
+                  balls.end(),
+                  [&](Ball * ball) {
+        time = std::min(time,
+                        BallsUtils::timeToCollisionWithTable(ball, this));
+    });
+
+    return time;
+}
+
 Table::~Table()
 {
     std::for_each(balls.begin(),
