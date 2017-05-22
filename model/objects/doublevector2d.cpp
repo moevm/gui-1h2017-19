@@ -58,6 +58,10 @@ double DoubleVector2D::getSize() const
 
 void DoubleVector2D::setSize(double value)
 {
+    if (value <= 0) {
+        value = 0;
+    }
+
     size = value;
     polarToRectangular();
 }

@@ -5,6 +5,9 @@ class Table;
 
 class PoolController
 {
+private:
+    Table * table;
+
 public:
     PoolController();
 

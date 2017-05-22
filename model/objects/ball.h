@@ -26,6 +26,8 @@ public:
     void setSpeed(DoubleVector2D speed);
 
     double getRadius() const;
+
+    bool moving() const;
 };
 
 #endif // BALL_H

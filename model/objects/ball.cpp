@@ -52,3 +52,8 @@ double Ball::getRadius() const
 {
     return radius;
 }
+
+bool Ball::moving() const
+{
+    return speed.getSize() != 0;
+}

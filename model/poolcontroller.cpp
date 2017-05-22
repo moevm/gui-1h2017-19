@@ -3,7 +3,6 @@
 
 PoolController::PoolController()
 {
-
 }
 
 void PoolController::calculateHit()
