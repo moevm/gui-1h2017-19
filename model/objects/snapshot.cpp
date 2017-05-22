@@ -1,8 +1,21 @@
 #include "snapshot.h"
 #include "table.h"
 
-Snapshot::Snapshot(Table * table, double timestamp)
-    : table(new Table(*table)),
+std::string Snapshot::getName() const
+{
+    return name;
+}
+
+double Snapshot::getTimestamp() const
+{
+    return timestamp;
+}
+
+Snapshot::Snapshot(std::string name,
+                   Table * table,
+                   double timestamp)
+    : name(name),
+      table(table),
       timestamp(timestamp)
 {}
 
