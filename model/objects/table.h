@@ -19,7 +19,15 @@ public:
 
     Table(Table const & table);
 
+    /**
+     * @brief getWidth
+     * @return ширину стола (ширина стола располагается вдоль оси ox)
+     */
     double getWidth() const;
+    /**
+     * @brief getHeight
+     * @return высоту стола (высота стола располагается вдоль оси oy)
+     */
     double getHeight() const;
 
     bool addBall(Ball * ball);
