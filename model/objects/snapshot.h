@@ -6,14 +6,14 @@ class Table;
 class Snapshot
 {
 private:
-    Table * table;
+    const Table *const table;
     double timestamp;
 
 public:
     Snapshot(Table * table,
              double timestamp);
 
-    Table * getTable() const;
+    const Table * getTable() const;
 };
 
 #endif // SNAPSHOT_H

@@ -6,7 +6,7 @@ Snapshot::Snapshot(Table * table, double timestamp)
       timestamp(timestamp)
 {}
 
-Table * Snapshot::getTable() const
+const Table * Snapshot::getTable() const
 {
     return table;
 }
