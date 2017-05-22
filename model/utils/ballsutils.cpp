@@ -81,7 +81,8 @@ bool BallsUtils::collisionWithTable(Ball * ball,
             abs(ballY) <= ballRadius;
 }
 
-double BallsUtils::timeToCollisionWithTable(Ball * ball, Table * table)
+double BallsUtils::timeToCollisionWithTable(const Ball * ball,
+                                            const Table * table)
 {
     if (ball->getSpeed().getSize() == 0) {
         return std::numeric_limits<double>::infinity();

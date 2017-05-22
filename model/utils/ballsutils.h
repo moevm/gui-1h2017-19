@@ -24,8 +24,8 @@ public:
     static bool collisionWithTable(Ball * ball,
                                    Table * table);
 
-    static double timeToCollisionWithTable(Ball * ball,
-                                           Table * table);
+    static double timeToCollisionWithTable(const Ball * ball,
+                                           const Table * table);
 };
 
 #endif // BALLSCOLLISIONS_H
