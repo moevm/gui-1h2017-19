@@ -68,7 +68,8 @@ void PoolController::calculateHit()
 
         table->goToNextStep(timeToNextStep);
 
-        // TODO: пересчитать параметры шаров и исключить остановившиеся
+        // TODO: пересчитать параметры шаров после соударения
+        table->recalculateWallCollision();
 
         calculationTime += timeToNextStep;
         saveToHistory(calculationTime, status);
