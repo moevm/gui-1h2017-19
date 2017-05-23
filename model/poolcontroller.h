@@ -6,6 +6,10 @@
 class Table;
 class Snapshot;
 
+namespace Constants {
+enum GameStatus;
+}
+
 class PoolController
 {
 private:
@@ -15,6 +19,8 @@ private:
 
     double timeToStop() const;
     double timeToWallCollision() const;
+    void saveToHistory(enum Constants::GameStatus status,
+                       calculationTime);
 
 public:
     void setTable(Table * table);

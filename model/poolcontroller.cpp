@@ -6,6 +6,8 @@
 #include <limits>
 #include <algorithm>
 
+using Constants::GameStatus;
+
 double PoolController::timeToStop() const
 {
     return table->shortestTimeToStop();
@@ -16,6 +18,28 @@ double PoolController::timeToWallCollision() const
     return table->shortestTimeToWall();
 }
 
+void PoolController::saveToHistory(calculationTime, GameStatus status)
+{
+    std::string statusName;
+    switch (status) {
+    case GameStatus::BALL_STOPPED:
+        statusName = "Остановка шара";
+        break;
+    case GameStatus::WALL_COLLISION:
+        statusName = "Столкновение со стеной";
+        break;
+    case GameStatus::BALLS_COLLISION:
+        statusName = "Соударение шаров";
+        break;
+    default:
+        statusName = "Неизвестный статус";
+        break;
+    }
+    history.push_back(new Snapshot(statusName,
+                                   table,
+                                   calculationTime));
+}
+
 void PoolController::setTable(Table * table)
 {
     this->table = table;
@@ -23,7 +47,11 @@ void PoolController::setTable(Table * table)
 
 void PoolController::calculateHit()
 {
-    using Constants::GameStatus;
+    double calculationTime = 0;
+
+    history.push_back(new Snapshot("start",
+                                   table,
+                                   calculationTime));
 
     while (table->hasMoving()) {
         double timeToNextStep = timeToStop();
@@ -39,6 +67,9 @@ void PoolController::calculateHit()
         // столкнутся)
         // TODO: переместить шары ко времени близжайшего события
         // TODO: пересчитать параметры шаров и исключить остановившиеся
+
+        calculationTime += timeToNextStep;
+        saveToHistory(calculationTime, status);
     }
 }
 
