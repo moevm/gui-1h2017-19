@@ -2,6 +2,7 @@
 #define BALLSWIDGET_H
 
 #include <QWidget>
+#include <QColor>
 
 namespace Ui {
 class BallsWidget;
@@ -19,10 +20,17 @@ signals:
     void prevPressed();
     void nextPressed();
 
+private slots:
+    void on_ballColor_clicked();
+
 private:
     Ui::BallsWidget *ui;
 
+    void configure();
     void bind();
+
+    QColor getBallColor() const;
+    void setBallColor(QColor color);
 };
 
 #endif // BALLSWIDGET_H
