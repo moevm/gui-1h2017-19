@@ -81,6 +81,54 @@ bool BallsUtils::collisionWithTable(Ball * ball,
             abs(ballY) <= ballRadius;
 }
 
+bool BallsUtils::horizontalCollisionWithTable(const Ball * ball,
+                                              const Table * table)
+{
+    return leftCollisionWithTable(ball, table) ||
+            rightCollisionWithTable(ball, table);
+}
+
+bool BallsUtils::verticalCollisionWithTable(const Ball * ball,
+                                            const Table * table)
+{
+    return upCollisionWithTable(ball, table) ||
+            downCollisionWithTable(ball, table);
+}
+
+bool BallsUtils::upCollisionWithTable(const Ball * ball,
+                                      const Table * table)
+{
+    using std::abs;
+
+    return abs(ball->getPosition().getY() - table->getHeight())
+            <= ball->getRadius();
+}
+
+bool BallsUtils::downCollisionWithTable(const Ball * ball,
+                                        const Table * /*table*/)
+{
+    using std::abs;
+
+    return abs(ball->getPosition().getY()) <= ball->getRadius();
+}
+
+bool BallsUtils::leftCollisionWithTable(const Ball * ball,
+                                        const Table * /*table*/)
+{
+    using std::abs;
+
+    return abs(ball->getPosition().getX()) <= ball->getRadius();
+}
+
+bool BallsUtils::rightCollisionWithTable(const Ball * ball,
+                                         const Table * table)
+{
+    using std::abs;
+
+    return abs(ball->getPosition().getX() - table->getWidth())
+            <= ball->getRadius();
+}
+
 double BallsUtils::timeToCollisionWithTable(const Ball * ball,
                                             const Table * table)
 {

@@ -14,6 +14,15 @@ private:
     static double timeBySA(double speed,
                            double accel);
 
+    static bool upCollisionWithTable(const Ball * ball,
+                                     const Table * table);
+    static bool downCollisionWithTable(const Ball * ball,
+                                       const Table * table);
+    static bool leftCollisionWithTable(const Ball * ball,
+                                       const Table * table);
+    static bool rightCollisionWithTable(const Ball * ball,
+                                        const Table * table);
+
 public:
     static double distance(Ball * first,
                            Ball * second);
@@ -23,6 +32,11 @@ public:
 
     static bool collisionWithTable(Ball * ball,
                                    Table * table);
+
+    static bool horizontalCollisionWithTable(const Ball * ball,
+                                             const Table * table);
+    static bool verticalCollisionWithTable(const Ball * ball,
+                                           const Table * table);
 
     static double timeToCollisionWithTable(const Ball * ball,
                                            const Table * table);
