@@ -32,6 +32,8 @@ public:
     bool moving() const;
 
     double timeToStop() const;
+
+    void goToNextStep(double timeDiff);
 };
 
 #endif // BALL_H

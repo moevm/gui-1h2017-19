@@ -72,3 +72,16 @@ double Ball::timeToStop() const
 
     return speed.getSize() / accel.getSize();
 }
+
+void Ball::goToNextStep(double timeDiff)
+{
+    position.setX(position.getX() + speed.getX() * timeDiff +
+                  accel.getX() * timeDiff * timeDiff);
+    speed.setX(speed.getX() + accel.getX() * timeDiff);
+
+    position.setY(position.getY() + speed.getY() * timeDiff +
+                  accel.getY() * timeDiff * timeDiff);
+    speed.setY(speed.getY() + accel.getY() * timeDiff);
+
+    recalculateAccel();
+}

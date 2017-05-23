@@ -34,6 +34,8 @@ public:
 
     bool hasMoving() const;
 
+    void goToNextStep(double timeDiff);
+
     double shortestTimeToStop() const;
     double shortestTimeToWall() const;
 

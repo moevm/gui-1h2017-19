@@ -72,6 +72,15 @@ bool Table::hasMoving() const
     return has;
 }
 
+void Table::goToNextStep(double timeDiff)
+{
+    std::for_each(balls.begin(),
+                  balls.end(),
+                  [=](Ball * ball) {
+        ball->goToNextStep(timeDiff);
+    });
+}
+
 double Table::shortestTimeToStop() const
 {
     double time = std::numeric_limits<double>::infinity();

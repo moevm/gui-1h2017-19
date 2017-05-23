@@ -65,7 +65,9 @@ void PoolController::calculateHit()
 
         // TODO: для каждой пары шаров найти время до столкновения (если
         // столкнутся)
-        // TODO: переместить шары ко времени близжайшего события
+
+        table->goToNextStep(timeToNextStep);
+
         // TODO: пересчитать параметры шаров и исключить остановившиеся
 
         calculationTime += timeToNextStep;
