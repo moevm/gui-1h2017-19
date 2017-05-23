@@ -15,8 +15,14 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+private slots:
+    void prevPage();
+    void nextPage();
+
 private:
     Ui::MainWindow *ui;
+
+    void bind();
 };
 
 #endif // MAINWINDOW_H

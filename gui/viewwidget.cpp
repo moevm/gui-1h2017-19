@@ -6,9 +6,17 @@ ViewWidget::ViewWidget(QWidget *parent) :
     ui(new Ui::ViewWidget)
 {
     ui->setupUi(this);
+
+    bind();
 }
 
 ViewWidget::~ViewWidget()
 {
     delete ui;
+}
+
+void ViewWidget::bind()
+{
+    connect(ui->prevButton, SIGNAL(clicked()),
+            this, SIGNAL(prevPressed()));
 }

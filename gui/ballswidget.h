@@ -15,8 +15,14 @@ public:
     explicit BallsWidget(QWidget *parent = 0);
     ~BallsWidget();
 
+signals:
+    void prevPressed();
+    void nextPressed();
+
 private:
     Ui::BallsWidget *ui;
+
+    void bind();
 };
 
 #endif // BALLSWIDGET_H

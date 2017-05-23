@@ -6,9 +6,17 @@ TableWidget::TableWidget(QWidget *parent) :
     ui(new Ui::TableWidget)
 {
     ui->setupUi(this);
+
+    bind();
 }
 
 TableWidget::~TableWidget()
 {
     delete ui;
+}
+
+void TableWidget::bind()
+{
+    connect(ui->nextButton, SIGNAL(clicked()),
+            this, SIGNAL(nextPressed()));
 }

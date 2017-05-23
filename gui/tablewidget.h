@@ -15,8 +15,13 @@ public:
     explicit TableWidget(QWidget *parent = 0);
     ~TableWidget();
 
+signals:
+    void nextPressed();
+
 private:
     Ui::TableWidget *ui;
+
+    void bind();
 };
 
 #endif // TABLEWIDGET_H
