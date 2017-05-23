@@ -39,6 +39,8 @@ public:
     double shortestTimeToStop() const;
     double shortestTimeToWall() const;
 
+    void recalculateWallCollision();
+
     ~Table();
 };
 

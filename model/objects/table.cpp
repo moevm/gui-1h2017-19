@@ -108,6 +108,25 @@ double Table::shortestTimeToWall() const
     return time;
 }
 
+void Table::recalculateWallCollision()
+{
+    std::for_each(balls.begin(),
+                  balls.end(),
+                  [&](Ball * ball) {
+        if (BallsUtils::horizontalCollisionWithTable(ball, this)) {
+            DoubleVector2D speed = ball->getSpeed();
+            speed.setX(-speed.getX());
+            ball->setSpeed(speed);
+        }
+
+        if (BallsUtils::verticalCollisionWithTable(ball, this)) {
+            DoubleVector2D speed = ball->getSpeed();
+            speed.setY(-speed.getY());
+            ball->setSpeed(speed);
+        }
+    });
+}
+
 Table::~Table()
 {
     std::for_each(balls.begin(),
