@@ -18,7 +18,7 @@ double PoolController::timeToWallCollision() const
     return table->shortestTimeToWall();
 }
 
-void PoolController::saveToHistory(calculationTime, GameStatus status)
+void PoolController::saveToHistory(double calculationTime, GameStatus status)
 {
     std::string statusName;
     switch (status) {

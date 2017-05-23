@@ -1,14 +1,12 @@
 #ifndef POOLCONTROLLER_H
 #define POOLCONTROLLER_H
 
+#include "constants/constants.h"
+
 #include <vector>
 
 class Table;
 class Snapshot;
-
-namespace Constants {
-enum GameStatus;
-}
 
 class PoolController
 {
@@ -19,8 +17,8 @@ private:
 
     double timeToStop() const;
     double timeToWallCollision() const;
-    void saveToHistory(enum Constants::GameStatus status,
-                       calculationTime);
+    void saveToHistory(double calculationTime,
+                       enum Constants::GameStatus status);
 
 public:
     void setTable(Table * table);
