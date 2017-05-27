@@ -75,10 +75,10 @@ bool BallsUtils::collisionWithTable(Ball * ball,
 
     using std::abs;
 
-    return abs(width - ballX) <= ballRadius ||
-            abs(height - ballY) <= ballRadius ||
-            abs(ballX) <= ballRadius ||
-            abs(ballY) <= ballRadius;
+    return (width - ballX) <= ballRadius ||
+            (height - ballY) <= ballRadius ||
+            (ballX) <= ballRadius ||
+            (ballY) <= ballRadius;
 }
 
 bool BallsUtils::horizontalCollisionWithTable(const Ball * ball,
