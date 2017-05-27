@@ -42,6 +42,8 @@ void TableWidget::initTable()
 void TableWidget::bind()
 {
     connect(ui->nextButton, SIGNAL(clicked()),
+            this, SLOT(emitTableGUI()));
+    connect(ui->nextButton, SIGNAL(clicked()),
             this, SIGNAL(nextPressed()));
 }
 
@@ -84,4 +86,9 @@ void TableWidget::on_tableHeight_valueChanged(double value)
 {
     table->setTableHeight(value);
     ui->tableView->fitInView(table->sceneRect(), Qt::KeepAspectRatio);
+}
+
+void TableWidget::emitTableGUI()
+{
+    emit tableCreated(table);
 }

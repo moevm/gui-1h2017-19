@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+class TableGUI;
+
 namespace Ui {
 class MainWindow;
 }
@@ -18,9 +20,11 @@ public:
 private slots:
     void prevPage();
     void nextPage();
+    void setTable(TableGUI * table);
 
 private:
     Ui::MainWindow *ui;
+    TableGUI * table;
 
     void bind();
 };

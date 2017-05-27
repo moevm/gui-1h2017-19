@@ -20,13 +20,14 @@ public:
 
 signals:
     void nextPressed();
+    void tableCreated(TableGUI * table);
 
 private slots:
     void on_tableColor_clicked();
-
     void on_tableWidth_valueChanged(double arg1);
-
     void on_tableHeight_valueChanged(double arg1);
+
+    void emitTableGUI();
 
 private:
     Ui::TableWidget * ui;
