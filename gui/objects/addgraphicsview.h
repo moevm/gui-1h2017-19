@@ -3,16 +3,19 @@
 
 #include <QGraphicsView>
 
+class BallsWidget;
+
 class AddGraphicsView : public QGraphicsView
 {
 public:
     AddGraphicsView(QWidget *& widget);
-
-signals:
-    doubleClick(QPointF point);
+    void setParentWidget(BallsWidget * parentWidget);
 
 protected:
     void mouseDoubleClickEvent(QMouseEvent * event);
+
+private:
+    BallsWidget * parentWidget;
 };
 
 #endif // ADDGRAPHICSVIEW_H

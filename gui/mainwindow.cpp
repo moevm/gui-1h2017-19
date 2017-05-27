@@ -1,11 +1,16 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "objects/tablegui.h"
+#include "objects/ballgui.h"
 #include "model/poolcontroller.h"
+#include "model/objects/ball.h"
+#include "model/objects/doublevector2d.h"
+#include "model/objects/table.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
+    table(nullptr),
     controller(new PoolController)
 {
     ui->setupUi(this);
@@ -35,6 +40,28 @@ void MainWindow::nextPage()
 void MainWindow::setTable(TableGUI * table)
 {
     this->table = table;
+    controller->setTable(new Table(table->getTableWidth(),
+                                   table->getTableHeight()));
+}
+
+void MainWindow::tryAddBall(QPointF * point)
+{
+    double x = point->x();
+    double y = point->y();
+
+    DoubleVector2D position;
+    position.setX(x);
+    position.setY(y);
+    Ball * ball = new Ball(position);
+
+    if (controller->addBall(ball)) {
+        BallGUI * ballGUI = new BallGUI(ball);
+        if (table != nullptr) {
+            table->addItem(ballGUI);
+        }
+    } else {
+        delete ball;
+    }
 }
 
 void MainWindow::bind()
@@ -60,4 +87,7 @@ void MainWindow::bind()
             ui->viewPage, SLOT(setTable(TableGUI*)));
     connect(ui->tablePage, SIGNAL(tableCreated(TableGUI*)),
             ui->ballsPage, SLOT(setTable(TableGUI*)));
+
+    connect(ui->ballsPage, SIGNAL(tryAddBall(QPointF*)),
+            this, SLOT(tryAddBall(QPointF*)));
 }

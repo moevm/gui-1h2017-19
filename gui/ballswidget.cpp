@@ -11,9 +11,15 @@ BallsWidget::BallsWidget(QWidget *parent) :
     table(nullptr)
 {
     ui->setupUi(this);
+    ui->tableView->setParentWidget(this);
 
     configure();
     bind();
+}
+
+void BallsWidget::addBall(QPointF * point)
+{
+    emit tryAddBall(point);
 }
 
 BallsWidget::~BallsWidget()

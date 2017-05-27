@@ -22,6 +22,7 @@ private slots:
     void prevPage();
     void nextPage();
     void setTable(TableGUI * table);
+    void tryAddBall(QPointF * point);
 
 private:
     Ui::MainWindow *ui;

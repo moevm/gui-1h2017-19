@@ -16,6 +16,7 @@ class BallsWidget : public QWidget
 
 public:
     explicit BallsWidget(QWidget *parent = 0);
+    void addBall(QPointF *point);
     ~BallsWidget();
 
 public slots:
@@ -24,6 +25,7 @@ public slots:
 signals:
     void prevPressed();
     void nextPressed();
+    void tryAddBall(QPointF * point);
 
 protected:
     void showEvent(QShowEvent * event);

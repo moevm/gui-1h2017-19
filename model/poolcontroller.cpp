@@ -43,6 +43,9 @@ void PoolController::saveToHistory(double calculationTime, GameStatus status)
 
 void PoolController::setTable(Table * table)
 {
+    if (this->table != nullptr) {
+        delete this->table;
+    }
     this->table = table;
 }
 
