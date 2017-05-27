@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 
+class PoolController;
 class TableGUI;
 
 namespace Ui {
@@ -25,6 +26,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     TableGUI * table;
+    PoolController * controller;
 
     void bind();
 };

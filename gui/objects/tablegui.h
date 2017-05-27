@@ -4,15 +4,12 @@
 #include <QGraphicsScene>
 #include <QGraphicsRectItem>
 #include <QColor>
-#include <QRect>
 
 class TableGUI : public QGraphicsScene
 {
 private:
     QGraphicsRectItem * table;
     QColor tableColor;
-
-    QRect viewport;
 
 public:
     TableGUI(double width,

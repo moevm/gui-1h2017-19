@@ -1,4 +1,5 @@
 #include "tablegui.h"
+#include "ballgui.h"
 
 TableGUI::TableGUI(double width, double height, QColor tableColor)
     : tableColor(tableColor)
@@ -6,6 +7,8 @@ TableGUI::TableGUI(double width, double height, QColor tableColor)
     table = new QGraphicsRectItem(0, 0, width * 100, height * 100);
     setTableColor(tableColor);
     addItem(table);
+    setSceneRect(table->rect());
+    addItem(new BallGUI());
 }
 
 double TableGUI::getTableWidth() const
