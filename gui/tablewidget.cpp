@@ -8,7 +8,8 @@
 
 TableWidget::TableWidget(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::TableWidget)
+    ui(new Ui::TableWidget),
+    table(nullptr)
 {
     ui->setupUi(this);
 
@@ -25,6 +26,11 @@ TableWidget::~TableWidget()
 void TableWidget::showEvent(QShowEvent * event)
 {
     QWidget::showEvent(event);
+    if (table != nullptr) {
+        delete table;
+    }
+    initTable();
+    table->setAllItemsMovable(false);
     fitToView();
 }
 

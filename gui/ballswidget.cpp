@@ -37,6 +37,9 @@ void BallsWidget::setTable(TableGUI * table)
 void BallsWidget::showEvent(QShowEvent * event)
 {
     QWidget::showEvent(event);
+    if (table != nullptr) {
+        table->setAllItemsMovable(true);
+    }
     fitToView();
 }
 

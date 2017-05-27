@@ -4,12 +4,16 @@
 #include <QGraphicsScene>
 #include <QGraphicsRectItem>
 #include <QColor>
+#include <set>
+
+class BallGUI;
 
 class TableGUI : public QGraphicsScene
 {
 private:
     QGraphicsRectItem * table;
     QColor tableColor;
+    std::set<BallGUI *> balls;
 
 public:
     TableGUI(double width,
@@ -22,6 +26,9 @@ public:
     void setTableHeight(double value);
     QColor getTableColor() const;
     void setTableColor(const QColor & value);
+
+    void setAllItemsMovable(bool movable);
+    void addBall(BallGUI * ball);
 };
 
 #endif // TABLEGUI_H

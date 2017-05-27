@@ -1,6 +1,8 @@
 #include "tablegui.h"
 #include "ballgui.h"
 
+#include <QDebug>
+
 TableGUI::TableGUI(double width, double height, QColor tableColor)
     : tableColor(tableColor)
 {
@@ -45,4 +47,21 @@ void TableGUI::setTableColor(const QColor & value)
 {
     tableColor = value;
     table->setBrush(tableColor);
+}
+
+void TableGUI::setAllItemsMovable(bool movable)
+{
+    std::for_each(balls.begin(),
+                  balls.end(),
+                  [=](BallGUI * ball) {
+        ball->setFlag(QGraphicsItem::ItemIsMovable, movable);
+    });
+}
+
+void TableGUI::addBall(BallGUI * ball)
+{
+    if (!balls.count(ball)) {
+        balls.insert(ball);
+    }
+    addItem(ball);
 }

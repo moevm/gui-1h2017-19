@@ -8,8 +8,7 @@
 AddGraphicsView::AddGraphicsView(QWidget *& widget)
     : QGraphicsView(widget),
       parentWidget(nullptr)
-{
-}
+{}
 
 void AddGraphicsView::setParentWidget(BallsWidget * parentWidget)
 {

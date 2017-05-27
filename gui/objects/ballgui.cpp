@@ -4,6 +4,7 @@
 
 #include <QBrush>
 #include <QDebug>
+#include <QGraphicsSceneMouseEvent>
 
 BallGUI::BallGUI(Ball * ball)
     : ball(ball)
@@ -40,7 +41,7 @@ void BallGUI::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
 {
     QGraphicsItem::mouseMoveEvent(event);
     DoubleVector2D position;
-    position.setX(scenePos().x() / 100);
-    position.setY(scenePos().y() / 100);
+    position.setX(event->scenePos().x() / 100);
+    position.setY(event->scenePos().y() / 100);
     ball->setPosition(position);
 }

@@ -6,6 +6,7 @@
 
 #include <limits>
 #include <algorithm>
+#include <QDebug>
 
 using Constants::GameStatus;
 
@@ -78,6 +79,8 @@ void PoolController::calculateHit()
         calculationTime += timeToNextStep;
         saveToHistory(calculationTime, status);
     }
+
+    qDebug() << "Рассчет завершен";
 }
 
 bool PoolController::addBall(Ball * ball)

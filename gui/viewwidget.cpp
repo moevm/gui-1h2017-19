@@ -34,6 +34,9 @@ void ViewWidget::resizeEvent(QResizeEvent * event)
 void ViewWidget::showEvent(QShowEvent * event)
 {
     QWidget::showEvent(event);
+    if (table != nullptr) {
+        table->setAllItemsMovable(false);
+    }
     fitToView();
 }
 

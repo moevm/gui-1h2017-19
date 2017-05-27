@@ -25,6 +25,7 @@ Ball::Ball(DoubleVector2D position,
       speed(speed),
       radius(0.034)
 {
+    qDebug() << "New ball, pos: " << position.getX() << " " << position.getY();
     recalculateAccel();
 }
 
@@ -36,7 +37,8 @@ DoubleVector2D Ball::getPosition() const
 void Ball::setPosition(DoubleVector2D position)
 {
     this->position = position;
-    qDebug() << position.getX() << " " << position.getY();
+    qDebug() << "Ball moved, pos: " << position.getX()
+             << " " << position.getY();
 }
 
 DoubleVector2D Ball::getSpeed() const
