@@ -36,6 +36,15 @@
      <property name="suffix">
       <string> м</string>
      </property>
+     <property name="minimum">
+      <double>0.820000000000000</double>
+     </property>
+     <property name="maximum">
+      <double>1.770000000000000</double>
+     </property>
+     <property name="singleStep">
+      <double>0.010000000000000</double>
+     </property>
     </widget>
    </item>
    <item row="2" column="1">
@@ -49,6 +58,15 @@
     <widget class="QDoubleSpinBox" name="tableHeight">
      <property name="suffix">
       <string> м</string>
+     </property>
+     <property name="minimum">
+      <double>1.640000000000000</double>
+     </property>
+     <property name="maximum">
+      <double>3.550000000000000</double>
+     </property>
+     <property name="singleStep">
+      <double>0.010000000000000</double>
      </property>
     </widget>
    </item>

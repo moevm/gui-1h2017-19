@@ -8,6 +8,8 @@ namespace Ui {
 class TableWidget;
 }
 
+class TableGUI;
+
 class TableWidget : public QWidget
 {
     Q_OBJECT
@@ -22,11 +24,18 @@ signals:
 private slots:
     void on_tableColor_clicked();
 
+    void on_tableWidth_valueChanged(double arg1);
+
+    void on_tableHeight_valueChanged(double arg1);
+
 private:
-    Ui::TableWidget *ui;
+    Ui::TableWidget * ui;
+    TableGUI * table;
 
     void configure();
+    void initTable();
     void bind();
+    void resizeEvent(QResizeEvent *event);
 
     QColor getTableColor() const;
     void setTableColor(QColor color);
