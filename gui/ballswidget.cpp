@@ -1,12 +1,14 @@
 #include "ballswidget.h"
 #include "ui_ballswidget.h"
+#include "objects/tablegui.h"
 
 #include <QPalette>
 #include <QColorDialog>
 
 BallsWidget::BallsWidget(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::BallsWidget)
+    ui(new Ui::BallsWidget),
+    table(nullptr)
 {
     ui->setupUi(this);
 
@@ -19,10 +21,30 @@ BallsWidget::~BallsWidget()
     delete ui;
 }
 
+void BallsWidget::setTable(TableGUI * table)
+{
+    this->table = table;
+    ui->tableView->setScene(table);
+    fitToView();
+}
+
+void BallsWidget::showEvent(QShowEvent * event)
+{
+    QWidget::showEvent(event);
+    fitToView();
+}
+
+void BallsWidget::resizeEvent(QResizeEvent * event)
+{
+    QWidget::resizeEvent(event);
+    fitToView();
+}
+
 void BallsWidget::configure()
 {
     ui->ballColor->setAutoFillBackground(true);
     setBallColor(QColor(Qt::gray));
+    ui->tableView->setBackgroundBrush(QBrush(QColor(Qt::lightGray)));
 }
 
 void BallsWidget::bind()
@@ -31,6 +53,13 @@ void BallsWidget::bind()
             this, SIGNAL(prevPressed()));
     connect(ui->nextButton, SIGNAL(clicked()),
             this, SIGNAL(nextPressed()));
+}
+
+void BallsWidget::fitToView()
+{
+    if (table != nullptr) {
+        ui->tableView->fitInView(table->sceneRect(), Qt::KeepAspectRatio);
+    }
 }
 
 QColor BallsWidget::getBallColor() const

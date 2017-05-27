@@ -54,4 +54,8 @@ void MainWindow::bind()
             this, SLOT(setTable(TableGUI*)));
     connect(ui->tablePage, SIGNAL(tableCreated(TableGUI*)),
             ui->hitPage, SLOT(setTable(TableGUI*)));
+    connect(ui->tablePage, SIGNAL(tableCreated(TableGUI*)),
+            ui->viewPage, SLOT(setTable(TableGUI*)));
+    connect(ui->tablePage, SIGNAL(tableCreated(TableGUI*)),
+            ui->ballsPage, SLOT(setTable(TableGUI*)));
 }

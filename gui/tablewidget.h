@@ -22,6 +22,10 @@ signals:
     void nextPressed();
     void tableCreated(TableGUI * table);
 
+protected:
+    void showEvent(QShowEvent * event);
+    void resizeEvent(QResizeEvent * event);
+
 private slots:
     void on_tableColor_clicked();
     void on_tableWidth_valueChanged(double arg1);
@@ -36,10 +40,11 @@ private:
     void configure();
     void initTable();
     void bind();
-    void resizeEvent(QResizeEvent *event);
 
     QColor getTableColor() const;
     void setTableColor(QColor color);
+
+    void fitToView();
 };
 
 #endif // TABLEWIDGET_H

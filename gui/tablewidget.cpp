@@ -22,6 +22,12 @@ TableWidget::~TableWidget()
     delete ui;
 }
 
+void TableWidget::showEvent(QShowEvent * event)
+{
+    QWidget::showEvent(event);
+    fitToView();
+}
+
 void TableWidget::configure()
 {
     ui->tableColor->setAutoFillBackground(true);
@@ -30,8 +36,6 @@ void TableWidget::configure()
 
 void TableWidget::initTable()
 {
-    qDebug() << ui->tableWidth->value();
-    qDebug() << ui->tableHeight->value();
     table = new TableGUI(ui->tableWidth->value(),
                          ui->tableHeight->value(),
                          getTableColor());
@@ -50,7 +54,7 @@ void TableWidget::bind()
 void TableWidget::resizeEvent(QResizeEvent * event)
 {
     QWidget::resizeEvent(event);
-    ui->tableView->fitInView(table->sceneRect(), Qt::KeepAspectRatio);
+    fitToView();
 }
 
 QColor TableWidget::getTableColor() const
@@ -66,6 +70,11 @@ void TableWidget::setTableColor(QColor color)
     ui->tableColor->setPalette(palette);
     ui->tableColor->update();
     table->setTableColor(color);
+}
+
+void TableWidget::fitToView()
+{
+    ui->tableView->fitInView(table->sceneRect(), Qt::KeepAspectRatio);
 }
 
 void TableWidget::on_tableColor_clicked()
