@@ -2,6 +2,7 @@
 #include "objects/table.h"
 #include "objects/snapshot.h"
 #include "constants/constants.h"
+#include "objects/ball.h"
 
 #include <limits>
 #include <algorithm>
@@ -74,6 +75,11 @@ void PoolController::calculateHit()
         calculationTime += timeToNextStep;
         saveToHistory(calculationTime, status);
     }
+}
+
+bool PoolController::addBall(Ball * ball)
+{
+    return table->addBall(ball);
 }
 
 PoolController::~PoolController()

@@ -7,6 +7,7 @@
 
 class Table;
 class Snapshot;
+class Ball;
 
 class PoolController
 {
@@ -23,6 +24,7 @@ private:
 public:
     void setTable(Table * table);
     void calculateHit();
+    bool addBall(Ball * ball);
 
     ~PoolController();
 };

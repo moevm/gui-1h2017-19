@@ -5,8 +5,8 @@
 #include <QBrush>
 #include <QDebug>
 
-BallGUI::BallGUI()
-    : ball(new Ball(DoubleVector2D(), 0.034))
+BallGUI::BallGUI(Ball * ball)
+    : ball(ball)
 {
     setRect(getX() - getRadius(),
             getY() - getRadius(),
@@ -39,5 +39,8 @@ Ball *BallGUI::getBall() const
 void BallGUI::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
 {
     QGraphicsItem::mouseMoveEvent(event);
-    qDebug() << this->pos().x() << " " << this->pos().y();
+    DoubleVector2D position;
+    position.setX(scenePos().x() / 100);
+    position.setY(scenePos().y() / 100);
+    ball->setPosition(position);
 }

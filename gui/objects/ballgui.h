@@ -8,7 +8,7 @@ class Ball;
 class BallGUI : public QGraphicsEllipseItem
 {
 public:
-    BallGUI();
+    BallGUI(Ball * ball);
 
     double getX() const;
     double getY() const;

@@ -3,6 +3,7 @@
 
 #include <cmath>
 #include <limits>
+#include <QDebug>
 
 void Ball::recalculateAccel()
 {
@@ -19,11 +20,10 @@ void Ball::recalculateAccel()
 }
 
 Ball::Ball(DoubleVector2D position,
-           double radius,
            DoubleVector2D speed)
     : position(position),
       speed(speed),
-      radius(radius)
+      radius(0.034)
 {
     recalculateAccel();
 }
@@ -36,6 +36,7 @@ DoubleVector2D Ball::getPosition() const
 void Ball::setPosition(DoubleVector2D position)
 {
     this->position = position;
+    qDebug() << position.getX() << " " << position.getY();
 }
 
 DoubleVector2D Ball::getSpeed() const

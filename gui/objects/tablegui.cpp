@@ -8,7 +8,6 @@ TableGUI::TableGUI(double width, double height, QColor tableColor)
     setTableColor(tableColor);
     addItem(table);
     setSceneRect(table->rect());
-    addItem(new BallGUI());
 }
 
 double TableGUI::getTableWidth() const

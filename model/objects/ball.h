@@ -16,7 +16,6 @@ private:
 
 public:
     Ball(DoubleVector2D position,
-         double radius,
          DoubleVector2D speed = DoubleVector2D());
 
     DoubleVector2D getPosition() const;
