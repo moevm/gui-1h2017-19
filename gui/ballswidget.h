@@ -9,6 +9,7 @@ class BallsWidget;
 }
 
 class TableGUI;
+class BallGUI;
 
 class BallsWidget : public QWidget
 {
@@ -37,10 +38,12 @@ private slots:
 private:
     Ui::BallsWidget *ui;
     TableGUI * table;
+    BallGUI * currentBall;
 
     void configure();
     void bind();
     void fitToView();
+    void enableSettings(bool enable);
 
     QColor getBallColor() const;
     void setBallColor(QColor color);

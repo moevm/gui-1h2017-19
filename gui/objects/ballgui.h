@@ -17,6 +17,7 @@ public:
 
 protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent * event);
+    void mousePressEvent(QGraphicsSceneMouseEvent * event);
 
 private:
     Ball * ball;

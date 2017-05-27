@@ -8,7 +8,8 @@
 BallsWidget::BallsWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::BallsWidget),
-    table(nullptr)
+    table(nullptr),
+    currentBall(nullptr)
 {
     ui->setupUi(this);
     ui->tableView->setParentWidget(this);
@@ -40,6 +41,7 @@ void BallsWidget::showEvent(QShowEvent * event)
     if (table != nullptr) {
         table->setAllItemsMovable(true);
     }
+    enableSettings(currentBall != nullptr);
     fitToView();
 }
 
@@ -69,6 +71,12 @@ void BallsWidget::fitToView()
     if (table != nullptr) {
         ui->tableView->fitInView(table->sceneRect(), Qt::KeepAspectRatio);
     }
+}
+
+void BallsWidget::enableSettings(bool enable)
+{
+    ui->ballColor->setEnabled(enable);
+    ui->ballColorLabel->setEnabled(enable);
 }
 
 QColor BallsWidget::getBallColor() const

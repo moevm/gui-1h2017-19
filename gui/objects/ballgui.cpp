@@ -45,3 +45,12 @@ void BallGUI::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
     position.setY(event->scenePos().y() / 100);
     ball->setPosition(position);
 }
+
+void BallGUI::mousePressEvent(QGraphicsSceneMouseEvent * event)
+{
+    if (event->button() == Qt::RightButton) {
+        qDebug() << "Right clicked";
+    } else {
+        QGraphicsEllipseItem::mousePressEvent(event);
+    }
+}
