@@ -6,6 +6,8 @@
 class Ball
 {
 private:
+    static unsigned long maxId;
+    unsigned long id;
     DoubleVector2D position;
     DoubleVector2D speed;
     DoubleVector2D accel;
@@ -29,6 +31,8 @@ public:
     double getRadius() const;
 
     bool moving() const;
+
+    unsigned long getId() const;
 
     double timeToStop() const;
 

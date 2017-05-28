@@ -5,6 +5,11 @@
 #include <algorithm>
 #include <limits>
 
+std::set<Ball *> Table::getBalls() const
+{
+    return balls;
+}
+
 Table::Table(double width,
              double height)
     : width(width),

@@ -15,6 +15,8 @@ public:
     double getY() const;
     double getRadius() const;
     Ball * getBall() const;
+    unsigned long getId() const;
+    void updateBall(Ball * ball);
 
     void paint(QPainter *painter,
                const QStyleOptionGraphicsItem *option,

@@ -15,19 +15,20 @@ double BallsUtils::timeByDSA(double dist, double speed, double accel)
 
     double timeToStop = timeBySA(speed, accel);
     double distToStop = speed * timeToStop +
-                        accel * std::pow(timeToStop, 2);
+                        accel * std::pow(timeToStop, 2) / 2;
 
     if (distToStop < dist) {
         return std::numeric_limits<double>::infinity();
     }
 
-    double discriminant = std::pow(speed, 2) + 4 * accel * dist;
+    double discriminant = 4 * std::pow(speed, 2) + 8 * accel * dist;
     assert(discriminant >= 0);
 
     using std::min;
     using std::sqrt;
-    double time = min((-speed - sqrt(discriminant)) / (2 * accel),
-                      (-speed + sqrt(discriminant)) / (2 * accel));
+    double neg = (-2 * speed - sqrt(discriminant)) / (2 * accel);
+    double pos = (-2 * speed + sqrt(discriminant)) / (2 * accel);
+    double time = min(neg, pos);
     assert(time >= 0);
 
     return time;
@@ -160,14 +161,27 @@ double BallsUtils::timeToCollisionWithTable(const Ball * ball,
         yAccel = -ball->getAccel().getY();
     }
 
-    assert(xDistance >= 0);
-    assert(xSpeed > 0);
-    assert(xAccel < 0);
+    double xTime = std::numeric_limits<double>::infinity();
+    double yTime = std::numeric_limits<double>::infinity();
 
-    assert(yDistance >= 0);
-    assert(ySpeed > 0);
-    assert(yAccel < 0);
+    if (ball->getSpeed().getX()) {
+        assert(xDistance >= 0);
+        assert(xSpeed > 0);
+        assert(xAccel < 0);
 
-    return std::min(timeByDSA(xDistance, xSpeed, xAccel),
-                    timeByDSA(yDistance, ySpeed, yAccel));
+
+        xTime = std::min(xTime,
+                         timeByDSA(xDistance, xSpeed, xAccel));
+    }
+
+    if (ball->getSpeed().getY()) {
+        assert(yDistance >= 0);
+        assert(ySpeed > 0);
+        assert(yAccel < 0);
+
+        yTime = std::min(yTime,
+                         timeByDSA(yDistance, ySpeed, yAccel));
+    }
+
+    return std::min(xTime, yTime);
 }

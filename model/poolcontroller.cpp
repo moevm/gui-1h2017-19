@@ -10,6 +10,11 @@
 
 using Constants::GameStatus;
 
+std::vector<Snapshot *> PoolController::getHistory() const
+{
+    return history;
+}
+
 double PoolController::timeToStop() const
 {
     return table->shortestTimeToStop();
@@ -54,6 +59,7 @@ void PoolController::calculateHit()
 {
     double calculationTime = 0;
 
+    history.clear();
     history.push_back(new Snapshot("start",
                                    table,
                                    calculationTime));

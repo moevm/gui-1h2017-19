@@ -5,6 +5,8 @@
 #include <QMouseEvent>
 #include <QPointF>
 
+#define SCALE 500
+
 AddGraphicsView::AddGraphicsView(QWidget *& widget)
     : QGraphicsView(widget),
       parentWidget(nullptr)
@@ -21,8 +23,8 @@ void AddGraphicsView::mouseDoubleClickEvent(QMouseEvent * event)
     if (rect().contains(point)) {
         QPointF mousePoint = mapToScene(point);
         if (parentWidget != nullptr) {
-            parentWidget->addBall(new QPointF(mousePoint.x() / 100,
-                                              mousePoint.y() / 100));
+            parentWidget->addBall(new QPointF(mousePoint.x() / SCALE,
+                                              mousePoint.y() / SCALE));
         }
     }
 }

@@ -1,6 +1,7 @@
 #include "tablewidget.h"
 #include "ui_tablewidget.h"
 #include "gui/objects/tablegui.h"
+#include "model/constants/constants.h"
 
 #include <QPalette>
 #include <QColorDialog>
@@ -26,6 +27,8 @@ TableWidget::~TableWidget()
 void TableWidget::showEvent(QShowEvent * event)
 {
     QWidget::showEvent(event);
+    ui->accel->setValue(-Constants::getAccel());
+
     if (table != nullptr) {
         delete table;
     }
@@ -106,4 +109,9 @@ void TableWidget::on_tableHeight_valueChanged(double value)
 void TableWidget::emitTableGUI()
 {
     emit tableCreated(table);
+}
+
+void TableWidget::on_accel_valueChanged(double accel)
+{
+    Constants::setAccel(-accel);
 }

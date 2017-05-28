@@ -110,8 +110,8 @@ void BallsWidget::on_ballColor_clicked()
 void BallsWidget::setCurrentBall()
 {
     currentBall = table->getSelectedBall();
-    enableSettings(true);
     if (currentBall != nullptr) {
+        enableSettings(true);
         QColor color = currentBall->brush().color();
         setBallColor(color);
     }

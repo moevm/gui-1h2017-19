@@ -15,7 +15,7 @@ Snapshot::Snapshot(std::string name,
                    Table * table,
                    double timestamp)
     : name(name),
-      table(table),
+      table(new Table(*table)),
       timestamp(timestamp)
 {}
 

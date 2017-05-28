@@ -42,6 +42,7 @@ public:
     void recalculateWallCollision();
 
     ~Table();
+    std::set<Ball *> getBalls() const;
 };
 
 #endif // TABLE_H

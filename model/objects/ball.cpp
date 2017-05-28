@@ -1,13 +1,14 @@
 #include "ball.h"
-#include "../constants/constants.h"
+#include "model/constants/constants.h"
 
 #include <cmath>
 #include <limits>
 #include <QDebug>
 
+unsigned long Ball::maxId = 0;
+
 void Ball::recalculateAccel()
 {
-    using Constants::ACCELERATION;
 
     if (speed.getSize() == 0) {
         accel.setX(0);
@@ -15,13 +16,15 @@ void Ball::recalculateAccel()
         return;
     }
 
+    const double ACCELERATION = Constants::getAccel();
     accel.setX(speed.getX() / speed.getSize() * ACCELERATION);
     accel.setY(speed.getY() / speed.getSize() * ACCELERATION);
 }
 
 Ball::Ball(DoubleVector2D position,
            DoubleVector2D speed)
-    : position(position),
+    : id(maxId++),
+      position(position),
       speed(speed),
       radius(0.034)
 {
@@ -48,7 +51,11 @@ DoubleVector2D Ball::getSpeed() const
 
 void Ball::setSpeed(DoubleVector2D speed)
 {
+    qDebug() << "Ball speed changed: " << speed.getSize() << " " << speed.getAngle();
     this->speed = speed;
+    if (speed.getSize() < 10e-9) {
+        this->speed.setSize(0);
+    }
     recalculateAccel();
 }
 
@@ -65,6 +72,11 @@ double Ball::getRadius() const
 bool Ball::moving() const
 {
     return speed.getSize() != 0;
+}
+
+unsigned long Ball::getId() const
+{
+    return id;
 }
 
 double Ball::timeToStop() const

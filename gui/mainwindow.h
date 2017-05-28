@@ -21,8 +21,11 @@ public:
 private slots:
     void prevPage();
     void nextPage();
+    void toStart();
+
     void setTable(TableGUI * table);
     void tryAddBall(QPointF * point);
+    void startCalc();
 
 private:
     Ui::MainWindow *ui;

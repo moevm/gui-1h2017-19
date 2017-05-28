@@ -33,6 +33,8 @@ private slots:
 
     void emitTableGUI();
 
+    void on_accel_valueChanged(double arg1);
+
 private:
     Ui::TableWidget * ui;
     TableGUI * table;

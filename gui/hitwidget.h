@@ -29,6 +29,13 @@ protected:
     void resizeEvent(QResizeEvent * event);
     void showEvent(QShowEvent * event);
 
+private slots:
+    void setCurrentBall();
+
+    void on_angle_valueChanged(int value);
+
+    void on_speed_valueChanged(int value);
+
 private:
     Ui::HitWidget *ui;
     TableGUI * table;

@@ -27,6 +27,7 @@ public:
     bool addBall(Ball * ball);
 
     ~PoolController();
+    std::vector<Snapshot *> getHistory() const;
 };
 
 #endif // POOLCONTROLLER_H

@@ -7,6 +7,7 @@
 #include <set>
 
 class BallGUI;
+class Ball;
 
 class TableGUI : public QGraphicsScene
 {
@@ -32,6 +33,8 @@ public:
     void addBall(BallGUI * ball);
     BallGUI * getSelectedBall() const;
     void setSelectedBall(BallGUI * ball);
+
+    void updateBall(Ball * ball);
 };
 
 #endif // TABLEGUI_H

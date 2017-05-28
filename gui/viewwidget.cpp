@@ -1,16 +1,41 @@
 #include "viewwidget.h"
 #include "ui_viewwidget.h"
 #include "objects/tablegui.h"
+#include "model/objects/snapshot.h"
+#include "model/objects/table.h"
+#include "model/objects/ball.h"
+
+#include <QDebug>
 
 ViewWidget::ViewWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ViewWidget),
-    table(nullptr)
+    table(nullptr),
+    currentTable(nullptr)
 {
     ui->setupUi(this);
 
     bind();
     configuration();
+}
+
+void ViewWidget::setHistory(std::vector<Snapshot *> history)
+{
+    ui->eventList->clear();
+    std::for_each(history.begin(),
+                  history.end(),
+                  [&](Snapshot * snapshot) {
+        ui->eventList->addItem(QString::fromStdString(snapshot->getName()) +
+                               " " + QString::number(snapshot->getTimestamp()));
+    });
+    this->history = history;
+    for (Snapshot * snapshot : history) {
+        qDebug() << "Snapshot " << snapshot->getTimestamp();
+        const Table * t = snapshot->getTable();
+        for (Ball * ball : t->getBalls()) {
+            qDebug() << "Ball " << ball->getId() << " pos " << ball->getPosition().getX() << ball->getPosition().getY();
+        }
+    }
 }
 
 ViewWidget::~ViewWidget()
@@ -56,4 +81,18 @@ void ViewWidget::fitToView()
     if (table != nullptr) {
         ui->tableView->fitInView(table->sceneRect(), Qt::KeepAspectRatio);
     }
+}
+
+void ViewWidget::on_eventList_doubleClicked(const QModelIndex &index)
+{
+    int row = index.row();
+    Snapshot * snapshot = history[row];
+    if (currentTable != nullptr) {
+        delete currentTable;
+    }
+    currentTable = new Table(*snapshot->getTable());
+    for (Ball * ball : currentTable->getBalls()) {
+        qDebug() << "Обновление шара номер " << ball->getId();
+        table->updateBall(ball);
+    };
 }

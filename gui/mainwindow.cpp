@@ -37,6 +37,11 @@ void MainWindow::nextPage()
     ui->stackedWidget->setCurrentIndex((index + 1) % count);
 }
 
+void MainWindow::toStart()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+}
+
 void MainWindow::setTable(TableGUI * table)
 {
     this->table = table;
@@ -62,6 +67,13 @@ void MainWindow::tryAddBall(QPointF * point)
     }
 }
 
+void MainWindow::startCalc()
+{
+    controller->calculateHit();
+    ui->viewPage->setHistory(controller->getHistory());
+    nextPage();
+}
+
 void MainWindow::bind()
 {
     connect(ui->tablePage, SIGNAL(nextPressed()),
@@ -73,9 +85,9 @@ void MainWindow::bind()
     connect(ui->hitPage, SIGNAL(prevPressed()),
             this, SLOT(prevPage()));
     connect(ui->hitPage, SIGNAL(nextPressed()),
-            this, SLOT(nextPage()));
+            this, SLOT(startCalc()));
     connect(ui->viewPage, SIGNAL(prevPressed()),
-            this, SLOT(prevPage()));
+            this, SLOT(toStart()));
 
     connect(ui->tablePage, SIGNAL(tableCreated(TableGUI*)),
             this, SLOT(setTable(TableGUI*)));
