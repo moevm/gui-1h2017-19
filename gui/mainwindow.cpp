@@ -55,10 +55,8 @@ void MainWindow::tryAddBall(QPointF * point)
     Ball * ball = new Ball(position);
 
     if (controller->addBall(ball)) {
-        BallGUI * ballGUI = new BallGUI(ball);
-        if (table != nullptr) {
-            table->addBall(ballGUI);
-        }
+        BallGUI * ballGUI = new BallGUI(ball, table);
+        table->addBall(ballGUI);
     } else {
         delete ball;
     }

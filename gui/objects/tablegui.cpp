@@ -3,8 +3,22 @@
 
 #include <QDebug>
 
+BallGUI * TableGUI::getSelectedBall() const
+{
+    return selectedBall;
+}
+
+void TableGUI::setSelectedBall(BallGUI * ball)
+{
+    if (balls.count(ball)) {
+        selectedBall = ball;
+        emit selectionChanged();
+    }
+}
+
 TableGUI::TableGUI(double width, double height, QColor tableColor)
-    : tableColor(tableColor)
+    : tableColor(tableColor),
+      selectedBall(nullptr)
 {
     table = new QGraphicsRectItem(0, 0, width * 100, height * 100);
     setTableColor(tableColor);

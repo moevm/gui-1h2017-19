@@ -4,16 +4,21 @@
 #include <QGraphicsEllipseItem>
 
 class Ball;
+class TableGUI;
 
 class BallGUI : public QGraphicsEllipseItem
 {
 public:
-    BallGUI(Ball * ball);
+    BallGUI(Ball * ball, TableGUI * table);
 
     double getX() const;
     double getY() const;
     double getRadius() const;
     Ball * getBall() const;
+
+    void paint(QPainter *painter,
+               const QStyleOptionGraphicsItem *option,
+               QWidget *widget);
 
 protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent * event);
@@ -21,6 +26,7 @@ protected:
 
 private:
     Ball * ball;
+    TableGUI * table;
 };
 
 #endif // BALLGUI_H

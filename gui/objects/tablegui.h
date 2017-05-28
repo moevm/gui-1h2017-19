@@ -14,6 +14,7 @@ private:
     QGraphicsRectItem * table;
     QColor tableColor;
     std::set<BallGUI *> balls;
+    BallGUI * selectedBall;
 
 public:
     TableGUI(double width,
@@ -29,6 +30,8 @@ public:
 
     void setAllItemsMovable(bool movable);
     void addBall(BallGUI * ball);
+    BallGUI * getSelectedBall() const;
+    void setSelectedBall(BallGUI * ball);
 };
 
 #endif // TABLEGUI_H

@@ -1,6 +1,7 @@
 #include "ballswidget.h"
 #include "ui_ballswidget.h"
 #include "objects/tablegui.h"
+#include "objects/ballgui.h"
 
 #include <QPalette>
 #include <QColorDialog>
@@ -31,6 +32,8 @@ BallsWidget::~BallsWidget()
 void BallsWidget::setTable(TableGUI * table)
 {
     this->table = table;
+    connect(this->table, SIGNAL(selectionChanged()),
+            SLOT(setCurrentBall()));
     ui->tableView->setScene(table);
     fitToView();
 }
@@ -90,6 +93,9 @@ void BallsWidget::setBallColor(QColor color)
     QPalette palette = ui->ballColor->palette();
     palette.setColor(QPalette::Button, color);
     ui->ballColor->setPalette(palette);
+    if (currentBall != nullptr) {
+        currentBall->setBrush(QBrush(color));
+    }
     ui->ballColor->update();
 }
 
@@ -97,6 +103,16 @@ void BallsWidget::on_ballColor_clicked()
 {
     QColor color = QColorDialog::getColor(getBallColor());
     if (color.isValid()) {
+        setBallColor(color);
+    }
+}
+
+void BallsWidget::setCurrentBall()
+{
+    currentBall = table->getSelectedBall();
+    enableSettings(true);
+    if (currentBall != nullptr) {
+        QColor color = currentBall->brush().color();
         setBallColor(color);
     }
 }

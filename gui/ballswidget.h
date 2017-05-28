@@ -34,6 +34,7 @@ protected:
 
 private slots:
     void on_ballColor_clicked();
+    void setCurrentBall();
 
 private:
     Ui::BallsWidget *ui;

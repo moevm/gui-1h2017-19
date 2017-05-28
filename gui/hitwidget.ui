@@ -14,18 +14,74 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0" rowspan="9">
-    <widget class="QGraphicsView" name="tableView"/>
+   <item row="6" column="2">
+    <widget class="QLabel" name="speedResultLabel">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string>0 м/с</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1" colspan="2">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>158</width>
+       <height>109</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="6" column="1">
+    <widget class="QLabel" name="speedLabel">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string>Скорость:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="1">
+    <widget class="QPushButton" name="prevButton">
+     <property name="text">
+      <string>&lt; Шары</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="2">
+    <widget class="QPushButton" name="nextButton">
+     <property name="text">
+      <string>Просмотр &gt;</string>
+     </property>
+    </widget>
    </item>
    <item row="0" column="1" colspan="2">
     <widget class="QLabel" name="angleMainLabel">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="text">
       <string>Выберите угол удара:</string>
      </property>
     </widget>
    </item>
+   <item row="0" column="0" rowspan="10">
+    <widget class="QGraphicsView" name="tableView"/>
+   </item>
    <item row="1" column="1" colspan="2">
     <widget class="QSlider" name="angle">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="maximum">
       <number>359</number>
      </property>
@@ -39,37 +95,19 @@
    </item>
    <item row="2" column="1">
     <widget class="QLabel" name="angleLabel">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="text">
       <string>Угол:</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="2">
-    <widget class="QLabel" name="angleResultLabel">
-     <property name="text">
-      <string>0°</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1" colspan="2">
-    <widget class="Line" name="firstLine">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="1" colspan="2">
-    <widget class="QLabel" name="speedMainLabel">
-     <property name="text">
-      <string>Выберите начальную скорость:</string>
-     </property>
-    </widget>
-   </item>
    <item row="5" column="1" colspan="2">
     <widget class="QSlider" name="speed">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="maximum">
       <number>1000</number>
      </property>
@@ -81,47 +119,46 @@
      </property>
     </widget>
    </item>
-   <item row="6" column="1">
-    <widget class="QLabel" name="speedLabel">
-     <property name="text">
-      <string>Скорость:</string>
+   <item row="2" column="2">
+    <widget class="QLabel" name="angleResultLabel">
+     <property name="enabled">
+      <bool>false</bool>
      </property>
-    </widget>
-   </item>
-   <item row="6" column="2">
-    <widget class="QLabel" name="speedResultLabel">
      <property name="text">
-      <string>0 м/с</string>
+      <string>0°</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
-   <item row="7" column="1" colspan="2">
-    <spacer name="verticalSpacer">
+   <item row="3" column="1" colspan="2">
+    <widget class="Line" name="firstLine">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>158</width>
-       <height>109</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="8" column="1">
-    <widget class="QPushButton" name="prevButton">
-     <property name="text">
-      <string>&lt; Шары</string>
+      <enum>Qt::Horizontal</enum>
      </property>
     </widget>
    </item>
-   <item row="8" column="2">
-    <widget class="QPushButton" name="nextButton">
+   <item row="4" column="1" colspan="2">
+    <widget class="QLabel" name="speedMainLabel">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="text">
-      <string>Просмотр &gt;</string>
+      <string>Выберите начальную скорость:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="1" colspan="2">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Нажмите правой клавишей по шару, чтобы его выбрать.</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
      </property>
     </widget>
    </item>

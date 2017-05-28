@@ -14,17 +14,7 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="1" column="1">
-    <widget class="QLabel" name="ballColorLabel">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="text">
-      <string>Цвет шара</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="2" colspan="2">
+   <item row="2" column="2" colspan="2">
     <widget class="QPushButton" name="ballColor">
      <property name="enabled">
       <bool>false</bool>
@@ -37,17 +27,34 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="0" rowspan="4">
+   <item row="0" column="0" rowspan="6">
     <widget class="AddGraphicsView" name="tableView"/>
    </item>
-   <item row="3" column="2" colspan="2">
+   <item row="2" column="1">
+    <widget class="QLabel" name="ballColorLabel">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string>Цвет шара</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QPushButton" name="prevButton">
+     <property name="text">
+      <string>&lt; Стол</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="2" colspan="2">
     <widget class="QPushButton" name="nextButton">
      <property name="text">
       <string>Удар &gt;</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="1" colspan="3">
+   <item row="4" column="1" colspan="3">
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -60,10 +67,23 @@
      </property>
     </spacer>
    </item>
-   <item row="3" column="1">
-    <widget class="QPushButton" name="prevButton">
+   <item row="3" column="1" colspan="3">
+    <widget class="QLabel" name="tip">
      <property name="text">
-      <string>&lt; Стол</string>
+      <string>Нажмите правой клавишей по шару для выбора</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1" colspan="3">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Щелкните 2 раза по столу для добавления шара</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
      </property>
     </widget>
    </item>

@@ -8,6 +8,7 @@ class HitWidget;
 }
 
 class TableGUI;
+class BallGUI;
 
 class HitWidget : public QWidget
 {
@@ -31,10 +32,12 @@ protected:
 private:
     Ui::HitWidget *ui;
     TableGUI * table;
+    BallGUI * selectedBall;
 
     void bind();
     void configuration();
     void fitToView();
+    void enableWidgets(bool enable);
 };
 
 #endif // HITWIDGET_H
