@@ -79,11 +79,9 @@ bool Table::hasMoving() const
 
 void Table::goToNextStep(double timeDiff)
 {
-    std::for_each(balls.begin(),
-                  balls.end(),
-                  [=](Ball * ball) {
+    for (Ball * ball : balls) {
         ball->goToNextStep(timeDiff);
-    });
+    }
 }
 
 double Table::shortestTimeToStop() const

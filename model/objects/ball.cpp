@@ -53,7 +53,7 @@ void Ball::setSpeed(DoubleVector2D speed)
 {
     qDebug() << "Ball speed changed: " << speed.getSize() << " " << speed.getAngle();
     this->speed = speed;
-    if (speed.getSize() < 10e-9) {
+    if (speed.getSize() < 1e-2) {
         this->speed.setSize(0);
     }
     recalculateAccel();
@@ -91,11 +91,11 @@ double Ball::timeToStop() const
 void Ball::goToNextStep(double timeDiff)
 {
     position.setX(position.getX() + speed.getX() * timeDiff +
-                  accel.getX() * timeDiff * timeDiff);
+                  accel.getX() * timeDiff * timeDiff / 2);
     speed.setX(speed.getX() + accel.getX() * timeDiff);
 
     position.setY(position.getY() + speed.getY() * timeDiff +
-                  accel.getY() * timeDiff * timeDiff);
+                  accel.getY() * timeDiff * timeDiff / 2);
     speed.setY(speed.getY() + accel.getY() * timeDiff);
 
     recalculateAccel();
