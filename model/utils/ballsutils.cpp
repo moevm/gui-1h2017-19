@@ -29,6 +29,9 @@ double BallsUtils::timeByDSA(double dist, double speed, double accel)
     double neg = (-2 * speed - sqrt(discriminant)) / (2 * accel);
     double pos = (-2 * speed + sqrt(discriminant)) / (2 * accel);
     double time = min(neg, pos);
+    if (pos < 0) {
+        time = neg;
+    }
     assert(time >= 0);
 
     return time;
@@ -102,7 +105,7 @@ bool BallsUtils::upCollisionWithTable(const Ball * ball,
     using std::abs;
 
     return abs(ball->getPosition().getY() - table->getHeight())
-            <= ball->getRadius();
+            <= ball->getRadius() + 10e-9;
 }
 
 bool BallsUtils::downCollisionWithTable(const Ball * ball,
@@ -110,7 +113,7 @@ bool BallsUtils::downCollisionWithTable(const Ball * ball,
 {
     using std::abs;
 
-    return abs(ball->getPosition().getY()) <= ball->getRadius();
+    return abs(ball->getPosition().getY()) <= ball->getRadius() + 10e-9;
 }
 
 bool BallsUtils::leftCollisionWithTable(const Ball * ball,
@@ -118,7 +121,7 @@ bool BallsUtils::leftCollisionWithTable(const Ball * ball,
 {
     using std::abs;
 
-    return abs(ball->getPosition().getX()) <= ball->getRadius();
+    return abs(ball->getPosition().getX()) <= ball->getRadius() + 10e-9;
 }
 
 bool BallsUtils::rightCollisionWithTable(const Ball * ball,
@@ -127,7 +130,7 @@ bool BallsUtils::rightCollisionWithTable(const Ball * ball,
     using std::abs;
 
     return abs(ball->getPosition().getX() - table->getWidth())
-            <= ball->getRadius();
+            <= ball->getRadius() + 10e-9;
 }
 
 double BallsUtils::timeToCollisionWithTable(const Ball * ball,
@@ -142,21 +145,21 @@ double BallsUtils::timeToCollisionWithTable(const Ball * ball,
     double xAccel, yAccel;
 
     if (ball->getSpeed().getX() > 0) {
-        xDistance = table->getWidth() - ball->getPosition().getX();
+        xDistance = table->getWidth() - ball->getPosition().getX() - ball->getRadius();
         xSpeed = ball->getSpeed().getX();
         xAccel = ball->getAccel().getX();
     } else {
-        xDistance = ball->getPosition().getX();
+        xDistance = ball->getPosition().getX() - ball->getRadius();
         xSpeed = -ball->getSpeed().getX();
         xAccel = -ball->getAccel().getX();
     }
 
     if (ball->getSpeed().getY() > 0) {
-        yDistance = table->getHeight() - ball->getPosition().getY();
+        yDistance = table->getHeight() - ball->getPosition().getY() - ball->getRadius();
         ySpeed = ball->getSpeed().getY();
         yAccel = ball->getAccel().getY();
     } else {
-        yDistance = ball->getPosition().getY();
+        yDistance = ball->getPosition().getY() - ball->getRadius();
         ySpeed = -ball->getSpeed().getY();
         yAccel = -ball->getAccel().getY();
     }

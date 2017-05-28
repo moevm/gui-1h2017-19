@@ -29,13 +29,6 @@ void ViewWidget::setHistory(std::vector<Snapshot *> history)
                                " " + QString::number(snapshot->getTimestamp()));
     });
     this->history = history;
-    for (Snapshot * snapshot : history) {
-        qDebug() << "Snapshot " << snapshot->getTimestamp();
-        const Table * t = snapshot->getTable();
-        for (Ball * ball : t->getBalls()) {
-            qDebug() << "Ball " << ball->getId() << " pos " << ball->getPosition().getX() << ball->getPosition().getY();
-        }
-    }
 }
 
 ViewWidget::~ViewWidget()

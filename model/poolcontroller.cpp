@@ -42,9 +42,20 @@ void PoolController::saveToHistory(double calculationTime, GameStatus status)
         statusName = "Неизвестный статус";
         break;
     }
-    history.push_back(new Snapshot(statusName,
-                                   table,
-                                   calculationTime));
+    Snapshot * newSnapshot = new Snapshot(statusName,
+                                          table,
+                                          calculationTime);
+
+    // КОСТЫЛИ-КОСТЫЛИКИ :D
+    if (history.size()) {
+        Snapshot * lastSnapshot = history.back();
+        if (newSnapshot->getName().compare(lastSnapshot->getName()) == 0 &&
+            newSnapshot->getTimestamp() - lastSnapshot->getTimestamp() < 1e-3) {
+            history.pop_back();
+        }
+    }
+
+    history.push_back(newSnapshot);
 }
 
 void PoolController::setTable(Table * table)
