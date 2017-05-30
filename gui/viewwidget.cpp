@@ -85,7 +85,7 @@ void ViewWidget::fitToView()
     }
 }
 
-void ViewWidget::setSnapshot(int index)
+void ViewWidget::setSnapshot(size_t index)
 {
     Snapshot * snapshot = history[index];
     if (currentTable != nullptr) {

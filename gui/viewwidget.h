@@ -49,12 +49,12 @@ private:
     std::vector<Snapshot *> history;
     QTimer * timer;
     double currentTime;
-    int currentHistoryIndex;
+    size_t currentHistoryIndex;
 
     void bind();
     void configuration();
     void fitToView();
-    void setSnapshot(int index);
+    void setSnapshot(size_t index);
     void updateTable();
 };
 
