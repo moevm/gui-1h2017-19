@@ -238,20 +238,11 @@ double BallsUtils::timeToCollisionWithTable(const Ball * ball,
     double yTime = std::numeric_limits<double>::infinity();
 
     if (ball->getSpeed().getX()) {
-        assert(xDistance >= 0);
-        assert(xSpeed > 0);
-        assert(xAccel < 0);
-
-
         xTime = std::min(xTime,
                          timeByDSA(xDistance, xSpeed, xAccel));
     }
 
     if (ball->getSpeed().getY()) {
-        assert(yDistance >= 0);
-        assert(ySpeed > 0);
-        assert(yAccel < 0);
-
         yTime = std::min(yTime,
                          timeByDSA(yDistance, ySpeed, yAccel));
     }
