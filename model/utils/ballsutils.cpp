@@ -6,6 +6,7 @@
 #include <limits>
 #include <algorithm>
 #include <cassert>
+#include <QDebug>
 
 double BallsUtils::timeByDSA(double dist, double speed, double accel)
 {
@@ -45,8 +46,8 @@ double BallsUtils::timeBySA(double speed, double accel)
     return std::abs(speed / accel);
 }
 
-double BallsUtils::distance(Ball * first,
-                            Ball * second)
+double BallsUtils::distance(const Ball * first,
+                            const Ball * second)
 {
     using std::sqrt;
     using std::pow;
@@ -64,7 +65,9 @@ double BallsUtils::distance(Ball * first,
 bool BallsUtils::collision(Ball * first,
                            Ball * second)
 {
-    return distance(first, second) <= first->getRadius() + second->getRadius();
+    const double dist = distance(first, second);
+    const double mindist = first->getRadius() + second->getRadius();
+    return dist <= mindist;
 }
 
 bool BallsUtils::collisionWithTable(Ball * ball,
@@ -99,6 +102,33 @@ bool BallsUtils::verticalCollisionWithTable(const Ball * ball,
             downCollisionWithTable(ball, table);
 }
 
+double BallsUtils::timeToCollision(const Ball * first, const Ball * second)
+{
+    double time = prefferedStepTime(first, second);
+    if (time == std::numeric_limits<double>::infinity()) {
+        return time;
+    }
+
+    Ball copy1(*first);
+    Ball copy2(*second);
+
+    const double mindist = first->getRadius() + second->getRadius();
+
+    time = 0;
+    while (distance(&copy1, &copy2) >= mindist) {
+        double timeDiff = prefferedStepTime(&copy1, &copy2);
+        if (timeDiff == std::numeric_limits<double>::infinity()) {
+            return timeDiff;
+        }
+        copy1.goToNextStep(timeDiff);
+        copy2.goToNextStep(timeDiff);
+        time += timeDiff;
+        qDebug() << "Dist&time" << distance(&copy1, &copy2) << " " << time;
+    }
+
+    return time;
+}
+
 bool BallsUtils::upCollisionWithTable(const Ball * ball,
                                       const Table * table)
 {
@@ -131,6 +161,46 @@ bool BallsUtils::rightCollisionWithTable(const Ball * ball,
 
     return abs(ball->getPosition().getX() - table->getWidth())
             <= ball->getRadius() + 10e-9;
+}
+
+double BallsUtils::prefferedStepTime(const Ball * first, const Ball * second)
+{
+    DoubleVector2D f2sVec;
+    f2sVec.setX(second->getPosition().getX() - first->getPosition().getX());
+    f2sVec.setY(second->getPosition().getY() - first->getPosition().getY());
+
+    DoubleVector2D s2fVec;
+    s2fVec.setX(first->getPosition().getX() - second->getPosition().getX());
+    s2fVec.setY(first->getPosition().getY() - second->getPosition().getY());
+
+    double firstProj = first->getSpeed().getX() * f2sVec.getX() +
+                       first->getSpeed().getY() * f2sVec.getY();
+    if (f2sVec.getSize() > 0) {
+        firstProj /= f2sVec.getSize();
+    } else {
+        firstProj = 0;
+    }
+
+    double secondProj = second->getSpeed().getX() * s2fVec.getX() +
+                        second->getSpeed().getY() * s2fVec.getY();
+    if (s2fVec.getSize() > 0) {
+        secondProj /= s2fVec.getSize();
+    } else {
+        secondProj = 0;
+    }
+
+    const double speedProj = firstProj + secondProj;
+    const double dist = distance(first, second) -
+                        (first->getRadius() + second->getRadius());
+
+    if (speedProj <= 1e-32) {
+        return std::numeric_limits<double>::infinity();
+    }
+
+    qDebug() << "dist&speed" << dist << " " << speedProj;
+    assert(dist != std::numeric_limits<double>::infinity());
+    return std::max(0.0001,
+                    dist / speedProj);
 }
 
 double BallsUtils::timeToCollisionWithTable(const Ball * ball,
@@ -187,4 +257,57 @@ double BallsUtils::timeToCollisionWithTable(const Ball * ball,
     }
 
     return std::min(xTime, yTime);
+}
+
+void BallsUtils::recalculateCollision(Ball * first, Ball * second)
+{
+    // меняем систему отсчета (2-ой шар)
+    const double secondXSpeed = second->getSpeed().getX();
+    const double secondYSpeed = second->getSpeed().getY();
+
+    DoubleVector2D speed;
+
+    speed = first->getSpeed();
+    speed.setX(speed.getX() - secondXSpeed);
+    speed.setY(speed.getY() - secondYSpeed);
+    first->setSpeed(speed);
+
+    speed = second->getSpeed();
+    speed.setX(speed.getX() - secondXSpeed);
+    speed.setY(speed.getY() - secondYSpeed);
+    second->setSpeed(speed);
+
+    // считаем скорости
+    // считаем вектор first.center -> second.center
+    DoubleVector2D vec;
+    double xvec = second->getPosition().getX() - first->getPosition().getX();
+    double yvec = second->getPosition().getY() - first->getPosition().getY();
+    vec.setX(xvec);
+    vec.setY(yvec);
+
+    // ищем косинус угла между first.speed (в новой системе отсчета) и
+    // vec
+    double xspeed = first->getSpeed().getX();
+    double yspeed = first->getSpeed().getY();
+    double cosangle = (xspeed * xvec + yspeed * yvec) /
+                      (first->getSpeed().getSize() * vec.getSize());
+
+    // укорачиваем вектор vec до проекции first.speed на него
+    vec.setSize(first->getSpeed().getSize() * cosangle);
+    xvec = vec.getX();
+    yvec = vec.getY();
+
+    // ищем новый вектор first.speed с помощью вычитания векторов first.speed
+    // и vec
+    xspeed -= xvec;
+    yspeed -= yvec;
+
+    // устанавливаем новые вектора скоростей и возвращаем систему отсчета
+    speed.setX(xspeed + secondXSpeed);
+    speed.setY(yspeed + secondYSpeed);
+    first->setSpeed(speed);
+
+    speed.setX(xvec + secondXSpeed);
+    speed.setY(yvec + secondYSpeed);
+    second->setSpeed(speed);
 }

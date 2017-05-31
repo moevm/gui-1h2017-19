@@ -25,6 +25,11 @@ double PoolController::timeToWallCollision() const
     return table->shortestTimeToWall();
 }
 
+double PoolController::timeToCollision() const
+{
+    return table->shortestTimeToCollision();
+}
+
 void PoolController::saveToHistory(double calculationTime, GameStatus status)
 {
     std::string statusName;
@@ -85,12 +90,16 @@ void PoolController::calculateHit()
             status = GameStatus::WALL_COLLISION;
         }
 
-        // TODO: для каждой пары шаров найти время до столкновения (если
-        // столкнутся)
+        double timeToBalls = timeToCollision();
+        // TODO: убрать timeToBalls > 0, когда доделаю BallsUtils::recalculateCollision
+        if (timeToBalls > 0 && timeToBalls < timeToNextStep) {
+            timeToNextStep = timeToBalls;
+            status = GameStatus::BALLS_COLLISION;
+        }
 
         table->goToNextStep(timeToNextStep);
 
-        // TODO: пересчитать параметры шаров после соударения
+        table->recalculateBallCollision();
         table->recalculateWallCollision();
 
         calculationTime += timeToNextStep;

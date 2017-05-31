@@ -18,6 +18,7 @@ private:
 
     double timeToStop() const;
     double timeToWallCollision() const;
+    double timeToCollision() const;
     void saveToHistory(double calculationTime,
                        enum Constants::GameStatus status);
 

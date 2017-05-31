@@ -1,7 +1,7 @@
 #include "constants.h"
 
 namespace Constants {
-static double ACCELERATION = -5.0;
+static double ACCELERATION = -2.5;
 
 void setAccel(double accel) {
     Constants::ACCELERATION = accel;

@@ -22,7 +22,7 @@ void TableGUI::setSelectedBall(BallGUI * ball)
 void TableGUI::updateBall(Ball * ball)
 {
     for (BallGUI * gui : balls) {
-        qDebug() << "Сравниваем с шаром номер " << gui->getId();
+//        qDebug() << "Сравниваем с шаром номер " << gui->getId();
         if (gui->getId() == ball->getId()) {
             gui->updateBall(ball);
             gui->update();

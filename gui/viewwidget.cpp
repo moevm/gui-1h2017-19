@@ -120,7 +120,7 @@ void ViewWidget::timeout()
     }
 
     currentTime += TIMEDIFF / MS_IN_SEC;
-    qDebug() << "Before: " << currentTime << " " << history[currentHistoryIndex]->getTimestamp();
+//    qDebug() << "Before: " << currentTime << " " << history[currentHistoryIndex]->getTimestamp();
     if (currentTime >= history[currentHistoryIndex + 1]->getTimestamp()) {
         double time = currentTime;
         currentHistoryIndex += 1;
@@ -136,7 +136,7 @@ void ViewWidget::timeout()
         currentTable->goToNextStep(TIMEDIFF / MS_IN_SEC);
     }
     updateTable();
-    qDebug() << "After: " << currentTime << " " << history[currentHistoryIndex]->getTimestamp();
+//    qDebug() << "After: " << currentTime << " " << history[currentHistoryIndex]->getTimestamp();
 }
 
 void ViewWidget::on_playButton_clicked()

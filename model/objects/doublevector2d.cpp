@@ -29,6 +29,13 @@ DoubleVector2D::DoubleVector2D(double size,
     polarToRectangular();
 }
 
+DoubleVector2D::DoubleVector2D(const DoubleVector2D & vec)
+    : x(vec.x),
+      y(vec.y),
+      size(vec.size),
+      angle(vec.angle)
+{}
+
 double DoubleVector2D::getX() const
 {
     return x;

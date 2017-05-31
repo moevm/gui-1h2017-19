@@ -23,9 +23,12 @@ private:
     static bool rightCollisionWithTable(const Ball * ball,
                                         const Table * table);
 
+    static double prefferedStepTime(const Ball * first,
+                                    const Ball * second);
+
 public:
-    static double distance(Ball * first,
-                           Ball * second);
+    static double distance(const Ball * first,
+                           const Ball * second);
 
     static bool collision(Ball * first,
                           Ball * second);
@@ -38,8 +41,13 @@ public:
     static bool verticalCollisionWithTable(const Ball * ball,
                                            const Table * table);
 
+    static double timeToCollision(const Ball * first,
+                                  const Ball * second);
     static double timeToCollisionWithTable(const Ball * ball,
                                            const Table * table);
+
+    static void recalculateCollision(Ball * first,
+                                     Ball * second);
 };
 
 #endif // BALLSCOLLISIONS_H

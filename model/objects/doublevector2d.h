@@ -17,6 +17,7 @@ private:
 public:
     DoubleVector2D(double size = 0,
                    double angle = 0);
+    DoubleVector2D(const DoubleVector2D & vec);
 
     double getX() const;
     void setX(double value);

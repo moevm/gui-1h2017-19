@@ -19,6 +19,7 @@ private:
 public:
     Ball(DoubleVector2D position,
          DoubleVector2D speed = DoubleVector2D());
+    Ball(const Ball & ball);
 
     DoubleVector2D getPosition() const;
     void setPosition(DoubleVector2D position);

@@ -28,9 +28,17 @@ Ball::Ball(DoubleVector2D position,
       speed(speed),
       radius(0.034)
 {
-    qDebug() << "New ball, pos: " << position.getX() << " " << position.getY();
+//    qDebug() << "New ball, pos: " << position.getX() << " " << position.getY();
     recalculateAccel();
 }
+
+Ball::Ball(const Ball & ball)
+    : id(ball.id),
+      position(ball.position),
+      speed(ball.speed),
+      accel(ball.accel),
+      radius(ball.radius)
+{}
 
 DoubleVector2D Ball::getPosition() const
 {
@@ -40,8 +48,8 @@ DoubleVector2D Ball::getPosition() const
 void Ball::setPosition(DoubleVector2D position)
 {
     this->position = position;
-    qDebug() << "Ball moved, pos: " << position.getX()
-             << " " << position.getY();
+//    qDebug() << "Ball moved, pos: " << position.getX()
+//             << " " << position.getY();
 }
 
 DoubleVector2D Ball::getSpeed() const
@@ -51,7 +59,7 @@ DoubleVector2D Ball::getSpeed() const
 
 void Ball::setSpeed(DoubleVector2D speed)
 {
-    qDebug() << "Ball speed changed: " << speed.getSize() << " " << speed.getAngle();
+//    qDebug() << "Ball speed changed: " << speed.getSize() << " " << speed.getAngle();
     this->speed = speed;
     if (speed.getSize() < 1e-2) {
         this->speed.setSize(0);

@@ -38,8 +38,10 @@ public:
 
     double shortestTimeToStop() const;
     double shortestTimeToWall() const;
+    double shortestTimeToCollision() const;
 
     void recalculateWallCollision();
+    void recalculateBallCollision();
 
     ~Table();
     std::set<Ball *> getBalls() const;
