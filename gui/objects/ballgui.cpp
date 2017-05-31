@@ -21,7 +21,7 @@ BallGUI::BallGUI(Ball * ball, TableGUI * table)
             ball->getRadius() * 2 * SCALE,
             ball->getRadius() * 2 * SCALE);
     setBrush(QBrush(QColor(Qt::white)));
-    setFlag(QGraphicsItem::ItemIsMovable, true);
+    setFlag(QGraphicsItem::ItemIsMovable, false);
 }
 
 double BallGUI::getX() const
