@@ -40,7 +40,7 @@ double Table::getHeight() const
 
 bool Table::addBall(Ball * ball)
 {
-    if (balls.size() >= 6) {
+    if (balls.size() >= 7) {
         return false;
     }
 
